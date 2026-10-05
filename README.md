@@ -46,6 +46,7 @@ Start: `/setup`. Then follow the build order at the end of this file.
 | `/propose <slug> [<type>]` | `clients/<slug>/proposals/YYYY-MM-DD-<type>.md` in one of four registers: **note** (someone close, no price, but the scope in writing), **diagnosis** and **project** (rate-card price only), **programme** (no price, but the deal written out). Seven gates run before a line is written: no price over an unconfirmed figure, no invented terms, and what was promised on a call binds what gets written | `diagnostico.md`, `preguntas.md`, `05-pricing`, `unit.md`, `04-voice`, `03-people` | stable |
 | `/calendar-sync` | the outreach calendar as a view: what goes out when, and what is already booked | `prospects.csv`, `events.csv`, the calendar | stable |
 | `/export [<unit>]` | packages what the repo knows so it can be carried to another machine or another person. Two questions, **neither with a default**: how much, and **who for** — that second one is a security boundary, since `.env`, the engine database and `.peek/` never travel to a teammate. `suppression.csv` travels **always**, at every scope: handing over the repo without it hands over the ability to write to people who asked not to be. Produces a dated folder with a README that says what is missing, not only what is there | the whole blueprint | stable |
+| `/import <path>` | lands an `/export` folder into this repo. Verifies every sha256 before touching anything, refuses a package from a different company, and **shows the diff of every colliding file** instead of overwriting. Three files get special treatment: `suppression.csv` is **merged and only ever grows**, `prospects.csv` is joined only where keys do not overlap, and `.env` is never written at all | the package, `00-overview`, `prospects.csv`, `suppression.csv` | stable |
 | `/value-case` | reference client case: what the problem costs them today → value method for `/price-it` | `07-icp`, `06-costs` | planned |
 | `/setup-update` | re-reads website + `documents/`, diffs against the blueprint, batch approval, changelog. Closes `/setup` gaps | `01`-`04` | planned |
 | `/analyze <item\|prompt>` | is it working? Reads what the other commands produced and what happened since (sales, replies, outcomes) and says where the blueprint, the ICP or the price fell short, with evidence. Takes an item name or a free question | everything under `0*.md`, the trackers | planned |
@@ -103,7 +104,8 @@ AGENTS.md                 thin pointer for non-Claude runtimes
 .claude/
   commands/               setup · costs · icp · price-it · competitors · product · prospects
                           set-engine · set-mail · mailbox · campaign · outreach · mail-sync
-                          adjust-tone · calendar-sync · client · diagnose · propose · export
+                          adjust-tone · calendar-sync · client · diagnose · propose
+                          export · import
   templates/client/       case · sources · transcript · summary · diagnosis · questions ·
                           the four proposal types (tracked)
   skills/company-blueprint/
@@ -121,7 +123,8 @@ clients/<slug>/           one client case: dossier, material, transcripts, summa
 ```
 
 The blueprint is gitignored, so a fresh clone has the framework and none of the company
-knowledge. `/export` is what carries it across, and it refuses to carry the keys.
+knowledge. `/export` is what carries it across, and it refuses to carry the keys. `/import` lands it on
+the other side, and it refuses to overwrite anything without showing you the diff first.
 
 ## Build order
 
