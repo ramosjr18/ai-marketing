@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(company-blueprint)",
+      "WebFetch",
+      "Bash(pdftotext:*)"
+    ]
+  }
+}

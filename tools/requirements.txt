@@ -1,0 +1,5 @@
+dkimpy==1.1.8
+dnspython==2.8.0
+faster-whisper==1.2.1
+imap-tools==1.15.0
+playwright==1.63.0

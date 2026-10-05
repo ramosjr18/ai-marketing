@@ -1,0 +1,64 @@
+<!--
+  Email signature template. Tracked in git; the populated copy lives in
+  `signatures/<person-slug>.html` and is gitignored with the rest of the blueprint.
+
+  Filled by /setup from the company data, edited by /set-mail.
+  Placeholders look like [LIKE_THIS]. A populated file never contains one.
+
+  Rules that matter more than they look:
+  - [LOGO_URL] must be a PUBLIC url on the company's own domain. A webmail's internal
+    image url (…/appsuite/api/image/…) needs a session and reaches the recipient as a
+    broken box: you see it, nobody else does.
+  - Tables and inline styles, no <style> block: Gmail strips the head.
+  - The confidentiality notice is OFF for cold outreach. Claiming confidentiality on a
+    message nobody asked for reads badly and adds weight. Keep it for day-to-day mail.
+  - The POPULATED file must carry no comments at all. It is inlined into the message body
+    as-is, and a comment spanning several lines survives a naive line filter and lands in
+    the recipient's inbox as visible text above the signature. It happened on 2026-09-21.
+    Anything worth explaining goes in signatures/README.md. This template may keep its own
+    comment because it is never sent.
+-->
+<table style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #333333; max-width: 600px;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="vertical-align: top; padding-right: 18px; border-right: 3px solid [BRAND_COLOR];"><img style="max-width: 100%; display: block;" src="[LOGO_URL]" alt="[COMPANY_NAME]" width="146" height="146"></td>
+<td style="vertical-align: top; padding-left: 18px;">
+<table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="font-size: 18px; font-weight: bold; color: [BRAND_COLOR]; padding-bottom: 2px; font-family: Arial, Helvetica, sans-serif;">[PERSON_NAME]</td>
+</tr>
+<tr>
+<td style="font-size: 13px; font-weight: bold; color: #555555; padding-bottom: 8px; font-family: Arial, Helvetica, sans-serif;">[PERSON_ROLE] · [COMPANY_NAME]</td>
+</tr>
+<tr>
+<td style="font-size: 12px; color: #777777; padding-bottom: 3px; font-family: Arial, Helvetica, sans-serif;">☎ [PHONE]</td>
+</tr>
+<tr>
+<td style="font-size: 12px; color: #777777; padding-bottom: 3px; font-family: Arial, Helvetica, sans-serif;">✉ <a style="color: [BRAND_COLOR]; text-decoration: none;" href="mailto:[EMAIL]">[EMAIL]</a></td>
+</tr>
+<tr>
+<td style="font-size: 12px; color: #777777; padding-bottom: 0px; font-family: Arial, Helvetica, sans-serif;">🌐 <a style="color: [BRAND_COLOR]; text-decoration: none;" href="[WEBSITE_URL]">[WEBSITE_DISPLAY]</a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- CONFIDENTIALITY NOTICE — keep for day-to-day mail, drop for cold outreach.
+<tr>
+<td style="padding-top: 15px;" colspan="2">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="border-top: 1px solid #e0e0e0; padding-top: 10px; font-size: 9px; color: #999999; line-height: 1.4; font-family: Arial, Helvetica, sans-serif;">[CONFIDENTIALITY_ES]</td>
+</tr>
+<tr>
+<td style="padding-top: 6px; font-size: 9px; color: #999999; line-height: 1.4; font-style: italic; font-family: Arial, Helvetica, sans-serif;">[CONFIDENTIALITY_EN]</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+-->
+</tbody>
+</table>

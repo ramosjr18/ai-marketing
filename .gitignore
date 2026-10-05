@@ -1,0 +1,33 @@
+# Populated blueprint: real company data, stays local. Templates are tracked.
+.claude/skills/company-blueprint/0*.md
+.claude/skills/company-blueprint/offering/**
+.claude/skills/company-blueprint/signatures/**
+.claude/skills/company-blueprint/tone/**
+
+# Source material (PDFs, decks, brand assets, exports)
+documents/**
+!documents/README.md
+!documents/*/
+!documents/*/.gitkeep
+
+# Casos de cliente: transcripciones, documentos y datos de terceros. Nunca a git.
+clients/**
+!clients/README.md
+
+__pycache__/
+
+# Python environment for tools/ (uv). Recreate with: uv venv && uv pip install -r tools/requirements.txt
+.venv/
+
+# Local overrides
+.claude/settings.local.json
+.env
+!.env.example
+
+# Capturas de tools/peek.py: pantallas de aplicaciones reales
+.peek/
+
+# El diario de diseño y el estado de esta máquina. Se quedan en disco, fuera de git:
+# traen decisiones fechadas, dominios, buzones y selectores DKIM.
+docs/**
+ESTADO.md
