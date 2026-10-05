@@ -14,6 +14,31 @@ repositories, and pip cannot install globally (PEP 668), so a virtualenv is the 
 
 Scripts read credentials from the repo's `.env`, written by `/set-engine` and `/set-mail`.
 
+## `imap_fetch.py` — leer el buzón, sin tocarlo
+
+Para `/mail-sync` y `/client email confirm`. El agente no sabe hablar IMAP; esto baja los
+mensajes nuevos y los imprime en JSON. Todo lo demás (emparejar una respuesta con un prospecto,
+clasificarla, decidir qué se contesta) es markdown y lo aprueba una persona.
+
+Dos reglas que no se saltan:
+
+- **No marca nada como leído.** Se baja con PEEK, así que el buzón queda como estaba para quien
+  lo abre después.
+- **La marca de agua solo avanza con `--commit`.** Una corrida que se cae a mitad de clasificar
+  no puede perder mensajes, así que leer y dar por leído son dos pasos.
+
+```bash
+tools/imap_fetch.py                        # todos los buzones, desde la última vez
+tools/imap_fetch.py --mailbox alex         # uno
+tools/imap_fetch.py --days 7               # los últimos 7 días
+tools/imap_fetch.py --commit               # guarda la marca de agua
+tools/imap_fetch.py --folder sent --to alguien@example.com --days 7
+```
+
+`--folder` lee fuera de la bandeja de entrada y **nunca toca el estado**: la marca de agua es de
+la bandeja, y buscar en Enviados no debe moverla. Es lo que usa `/client email confirm` para
+guardar la versión que salió de verdad.
+
 ## `linkedin.py` — canal LinkedIn asistido
 
 Opera sobre **el Chromium que arrancas tú**, con tu sesión ya iniciada. No abre navegadores, no
@@ -45,6 +70,27 @@ con el `linkedin_url` del tracker.
 
 Si un selector no aparece, **para**. Es deliberado: significa que LinkedIn ha cambiado la página,
 y lo correcto es arreglar el script, no buscar un botón parecido.
+
+## `explore.py` — recorrer la aplicación, pulsando
+
+Hermano de `peek.py`, con el contrato contrario a propósito. `peek.py` no pulsa nada, así que se
+lanza sobre cualquier cosa sin pensarlo; éste **sí pulsa**, y por eso se usa a sabiendas y solo
+sobre la aplicación de quien lo pide.
+
+Rellena formularios con `--fill`, para crear datos de prueba y ver el producto funcionando. Lo
+que no hace, salvo que se le fuerce: pulsar lo que borra, cancela o da de baja. **`--force`
+existe y hay que escribirlo.** Y todo lo que crea lleva el prefijo `ZZ TEST` en el nombre, para
+poder encontrarlo y borrarlo después sin dudar de si era real.
+
+Trabaja sobre una pestaña **ya abierta**, la que tiene la sesión. No abre pestañas propias: en
+una SPA la sesión se pasa navegando desde dentro, no por URL.
+
+```bash
+.venv/bin/python tools/explore.py --url dashboard --map
+.venv/bin/python tools/explore.py --url dashboard --click "Abrir Recruitment"
+.venv/bin/python tools/explore.py --url recruitment --click "Candidatos" --read
+.venv/bin/python tools/explore.py --url recruitment --back
+```
 
 ## `peek.py` — leer la pestaña que tienes delante
 

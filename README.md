@@ -115,7 +115,8 @@ AGENTS.md                 thin pointer for non-Claude runtimes
     offering/<slug>/      populated per-unit files (gitignored); _shared/ for group ICPs
     signatures/<slug>.*   populated signatures (gitignored)
     tone/<slug>.md        how each signer writes, and why (gitignored)
-tools/                    imap_fetch.py · linkedin.py · peek.py · transcribe.py · id7.py
+tools/                    imap_fetch.py · linkedin.py · peek.py · explore.py ·
+                          transcribe.py · id7.py
                           code only where an agent cannot reach
 documents/                source material about the company (gitignored)
 clients/<slug>/           one client case: dossier, material, transcripts, summaries, emails,
